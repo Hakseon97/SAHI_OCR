@@ -1,0 +1,59 @@
+# Dataset Configuration
+path: ../data
+train: images/train
+val: images/val
+test: images/test
+
+# Classes
+nc: 2
+names: ['note', 'textbox']
+
+# Training Hyperparameters
+epochs: 100
+batch_size: 16
+imgsz: 640
+workers: 8
+
+# Device
+device: 'cpu'  # Use '0' for first GPU, 'cpu' for CPU
+
+# Optimizer
+optimizer: 'Adam'
+lr0: 0.01
+lrf: 0.01
+momentum: 0.937
+weight_decay: 0.0005
+
+# Learning Rate Scheduler
+warmup_epochs: 3
+warmup_epochs: 3.0
+warmup_momentum: 0.8
+warmup_bias_lr: 0.1
+patience: 50
+
+# Augmentation
+hsv_h: 0.015
+hsv_s: 0.7
+hsv_v: 0.4
+degrees: 0.0
+translate: 0.1
+scale: 0.5
+shear: 0.0
+perspective: 0.0
+flipud: 0.0
+fliplr: 0.5
+
+# Logging and Saving
+project: 'runs/train'
+name: 'yolo_training_test'
+exist_ok: False
+logdir: 'logs/tensorboard'
+save: True
+save_period: -1
+
+# Miscellaneous
+pretrained: True
+resume: False
+verbose: True
+seed: 0
+deterministic: True

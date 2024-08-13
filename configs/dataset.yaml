@@ -1,0 +1,11 @@
+# YOLOv8 Training Configuration
+path: /data/
+
+# Dataset Configuration
+train: images/train
+val: images/valid
+test: images/test
+
+# Classes
+nc: 2
+names: ['note', 'textbox']

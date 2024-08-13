@@ -1,0 +1,44 @@
+# YOLOv8 Training Configuration
+# Training Parameters
+epochs: 100
+imgsz: 640
+batch: 16
+workers: 8
+
+# Device
+device: 'cpu'  # Use '0' for first GPU, 'cpu' for CPU
+
+# Optimizer
+optimizer: 'Adam'
+lr0: 0.01
+weight_decay: 0.0005
+
+# Learning Rate Scheduler
+warmup_epochs: 3
+patience: 50
+
+# Augmentation
+hsv_h: 0.015
+hsv_s: 0.7
+hsv_v: 0.4
+degrees: 0.0
+translate: 0.1
+scale: 0.5
+shear: 0.0
+perspective: 0.0
+flipud: 0.0
+fliplr: 0.5
+
+# Saving and Logging
+save: True
+project: 'runs/train'
+name: 'yolo_training_test'
+exist_ok: False
+logdir: 'logs/tensorboard'
+
+# Miscellaneous
+pretrained: True
+resume: False
+verbose: True
+seed: 0
+deterministic: True
