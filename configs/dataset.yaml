@@ -1,11 +1,11 @@
 # YOLOv8 Training Configuration
-path: /data/
+path: D:/workspace/SAHI_OCR/data/note
 
 # Dataset Configuration
-train: images/train
-val: images/valid
-test: images/test
+train: train/images
+val: val/images
+test: test/images
 
 # Classes
 nc: 2
-names: ['note', 'textbox']
+names: ['note', 'layouts']

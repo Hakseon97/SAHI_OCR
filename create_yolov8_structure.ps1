@@ -1,51 +1,53 @@
-# PowerShell script to create YOLOv8 for SAHI project structure
-
 # Create root directory
 $rootDir = "yolov8_for_sahi"
-New-Item -ItemType Directory -Force -Path $rootDir
 
-# Create subdirectories
-$dirs = @(
-    "data/dataset/images/train",
-    "data/dataset/images/val",
-    "data/dataset/images/test",
-    "data/dataset/labels/train",
-    "data/dataset/labels/val",
-    "data/dataset/labels/test",
-    "configs",
-    "models",
-    "scripts/utils",
-    "notebooks",
-    "runs/detect",
-    "runs/train",
-    "runs/val",
-    "runs/predict"
-)
-
-foreach ($dir in $dirs) {
-    New-Item -ItemType Directory -Force -Path "$rootDir/$dir"
+# Function to create directories
+function Create-Directory {
+    param (
+        [string]$path
+    )
+    New-Item -Path $path -ItemType Directory -Force | Out-Null
 }
 
-# Create empty files
-$files = @(
-    "configs/yolov8_config.yaml",
-    "models/yolov8n.pt",
-    "models/custom_model.pt",
-    "scripts/train.py",
-    "scripts/val.py",
-    "scripts/predict.py",
-    "scripts/export.py",
-    "scripts/utils/dataloader.py",
-    "scripts/utils/augmentations.py",
-    "notebooks/data_exploration.ipynb",
-    "notebooks/model_analysis.ipynb",
-    "requirements.txt",
-    "README.md",
-    ".gitignore"
-)
-
-foreach ($file in $files) {
-    New-Item -ItemType File -Force -Path "$rootDir/$file"
+# Function to create multiple directories
+function Create-Directories {
+    param (
+        [string]$basePath,
+        [string[]]$dirs
+    )
+    foreach ($dir in $dirs) {
+        Create-Directory -path (Join-Path $basePath $dir)
+    }
 }
 
-Write-Host "YOLOv8 for SAHI project structure has been created successfully!"
+# Main directory structure
+$mainDirs = @(
+    "configs", "data", "models", "notebook", "runs", "scripts", "utils"
+)
+
+# Create main directories
+Create-Directories -basePath $baseDir -dirs $mainDirs
+
+# Data subdirectories
+$dataDirs = @(
+    "demo",
+    "note\test\images", "note\test\labels",
+    "note\train\images", "note\train\labels",
+    "note\val\images", "note\val\labels",
+    "rawdata\images", "rawdata\labels"
+)
+
+# Create data subdirectories
+Create-Directories -basePath (Join-Path $baseDir "data") -dirs $dataDirs
+
+# Runs subdirectories
+$runsDirs = @(
+    "detect\train\weights",
+    "detect\train2\weights",
+    "train\yolo_training_test\weights"
+)
+
+# Create runs subdirectories
+Create-Directories -basePath (Join-Path $baseDir "runs") -dirs $runsDirs
+
+Write-Host "Directory structure created successfully."

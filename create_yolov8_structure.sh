@@ -4,50 +4,49 @@
 
 # Create root directory
 rootDir="yolov8_for_sahi"
-mkdir -p "$rootDir"
 
-# Create subdirectories
-dirs=(
-    "data/dataset/images/train"
-    "data/dataset/images/val"
-    "data/dataset/images/test"
-    "data/dataset/labels/train"
-    "data/dataset/labels/val"
-    "data/dataset/labels/test"
-    "configs"
-    "models"
-    "scripts/utils"
-    "notebooks"
-    "runs/detect"
-    "runs/train"
-    "runs/val"
-    "runs/predict"
+# Function to create directories
+create_directory() {
+    mkdir -p "$1"
+}
+
+# Function to create multiple directories
+create_directories() {
+    local base_path="$1"
+    shift
+    for dir in "$@"; do
+        create_directory "${base_path}/${dir}"
+    done
+}
+
+# Main directory structure
+mainDirs=(
+    "configs" "data" "models" "notebook" "runs" "scripts" "utils"
 )
 
-for dir in "${dirs[@]}"; do
-    mkdir -p "$rootDir/$dir"
-done
+# Create main directories
+create_directories "$baseDir" "${mainDirs[@]}"
 
-# Create empty files
-files=(
-    "configs/yolov8_config.yaml"
-    "models/yolov8n.pt"
-    "models/custom_model.pt"
-    "scripts/train.py"
-    "scripts/val.py"
-    "scripts/predict.py"
-    "scripts/export.py"
-    "scripts/utils/dataloader.py"
-    "scripts/utils/augmentations.py"
-    "notebooks/data_exploration.ipynb"
-    "notebooks/model_analysis.ipynb"
-    "requirements.txt"
-    "README.md"
-    ".gitignore"
+# Data subdirectories
+dataDirs=(
+    "demo"
+    "note/test/images" "note/test/labels"
+    "note/train/images" "note/train/labels"
+    "note/val/images" "note/val/labels"
+    "rawdata/images" "rawdata/labels"
 )
 
-for file in "${files[@]}"; do
-    touch "$rootDir/$file"
-done
+# Create data subdirectories
+create_directories "${baseDir}/data" "${dataDirs[@]}"
 
-echo "YOLOv8 for SAHI project structure has been created successfully!"
+# Runs subdirectories
+runsDirs=(
+    "detect/train/weights"
+    "detect/train2/weights"
+    "train/yolo_training_test/weights"
+)
+
+# Create runs subdirectories
+create_directories "${baseDir}/runs" "${runsDirs[@]}"
+
+echo "Directory structure created successfully."
