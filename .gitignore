@@ -35,16 +35,27 @@ env/
 .env
 
 # YOLOv8 and SAHI specific
-runs/*
-!runs/.gitkeep
+runs/detect/*
 *.pt
-!models/*.pt  # Keep placeholder model files in the models directory
 
-# Dataset
-data/dataset/images/*
-data/dataset/labels/*
-!data/dataset/images/.gitkeep
-!data/dataset/labels/.gitkeep
+# Keep the folder structure but ignore contents
+/data/demo/*
+/data/note/test/images/*
+!/data/note/test/images/.gitkeep
+/data/note/test/labels/*
+!/data/note/test/labels/.gitkeep
+/data/note/train/images/*
+!/data/note/train/images/.gitkeep
+/data/note/train/labels/*
+!/data/note/train/labels/.gitkeep
+/data/note/val/images/*
+!/data/note/val/images/.gitkeep
+/data/note/val/labels/*
+!/data/note/val/labels/.gitkeep
+/data/rawdata/images/*
+!/data/rawdata/images/.gitkeep
+/data/rawdata/labels/*
+!/data/rawdata/labels/.gitkeep
 
 # Logs
 *.log
